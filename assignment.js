@@ -1,4 +1,6 @@
+// https://github.com/Abdify/js_practice
 function kilometerToMeter(kilometer){
+    //Checks if the input is a non-negative number
     if(kilometer>=0 && typeof kilometer === "number"){
         return kilometer * 1000;
     }
@@ -11,17 +13,19 @@ function kilometerToMeter(kilometer){
 
 
 function budgetCalculator(watch, phone, laptop){
-    if (watch >= 0 && phone >= 0 && laptop >= 0 && typeof watch === "number" && typeof phone === "number" && typeof laptop === "number") {
+    //Checks if the inputs are  non-negative integers
+    if (watch >= 0 && phone >= 0 && laptop >= 0 && Number.isInteger(watch) && Number.isInteger(phone) && Number.isInteger(laptop)) {
         return watch * 50 + phone * 100 + laptop * 500;
     }
     else{
-        return "Enter valid numbers!";
+        return "Enter valid integers!";
     }
 }
 
 
 
 function hotelCost(nights){
+    //Checks if input is non-negative
     if(nights < 0){
         return "Enter a valid number!";
     }
@@ -40,18 +44,18 @@ function hotelCost(nights){
 
 function megaFriend(friends) {
     //return friends.sort((a, b) => {return b.length - a.length;})[0];
-
-    if(friends.length > 0 && typeof friends === "object"){
+    //Checks if input is an array containig at least one value
+    if(friends.length > 0 && Array.isArray(friends)){
         let longestName = friends[0];
         for (let i = 0; i < friends.length; i++) {
-            if(friends[i].length >= longestName.length){
+            if(friends[i].length > longestName.length){
                 longestName = friends[i];
             }
         }
         return longestName;    
     }
     else{
-        return "Enter at least one friend's name!";
+        return "Enter an array with at least one friend's name!";
     }
 
 }
