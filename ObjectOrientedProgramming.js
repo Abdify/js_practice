@@ -1,3 +1,4 @@
+//Use class for creating many objects containing common properties and methods
 class House {
     constructor(numberOfRooms, roomLength, roomWidth, price) {
         this.name = "The name";
@@ -14,10 +15,8 @@ class House {
     }
 }
 
-
-
-
 house1 = new House(3, 5, 5, 20000);
+//add uncommon property
 house1.table = 5;
 
 console.log(JSON.stringify(house1));
@@ -25,11 +24,16 @@ console.log(house1.sayName());
 console.log(house1.area());
 console.log(house1.__proto__);
 
-let house2 = Object.create(house1);
 
+
+// Use one object as a prototype of another object 
+let house2 = Object.create(house1);
 console.log(JSON.stringify(house2.__proto__));
 
 
+
+
+//Same prototype for different constructors
 function Books() { };
 Books.prototype = {
     constructor: Books,
@@ -37,16 +41,18 @@ Books.prototype = {
         return this.name;
     }
 }
-
+//constructor 1
 function SciFi(name) {
     this.name = name;
 }
+//constructor 2
 function Islamic(name) {
     this.name = name;
 }
+//assign common prototype
 SciFi.prototype = Object.create(Books.prototype);
 Islamic.prototype = Object.create(Books.prototype);
-
+//Remember to set constructor after assigning prototype
 SciFi.prototype.constructor = SciFi;
 Islamic.prototype.constructor = Islamic;
 
@@ -56,15 +62,14 @@ let book2 = new SciFi("future");
 console.log(book1.sayName());
 console.log(book1.constructor);
 console.log(Islamic.prototype);
-
+//create uncommon methods
 Islamic.prototype.NumberOfHadith = function () {
     return "10";
 }
-
-console.log(book1.NumberOfHadith());
-
+console.log("number = ", book1.NumberOfHadith());
 
 
+//Create a mixin to make a collection of methods for particular objects without changing the prototype
 let mixin = function (obj) {
     obj.fly = function () {
         console.log("I am flying...tururut turu");
@@ -74,6 +79,8 @@ mixin(SciFi);
 SciFi.fly();
 
 
+
+//Practice
 function properties(obj){
     let properties = [];
     for(property in obj){
