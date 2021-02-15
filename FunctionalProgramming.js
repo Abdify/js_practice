@@ -240,3 +240,23 @@ function sum(){
   return sum;
 }
 console.log(sum());
+
+
+//Bind Call Apply
+const user1 = {
+  name: 'user1',
+  getName(lastName){
+    console.log(`${this.name} ${lastName}`);
+  }
+}
+const user2 = {
+  name: 'user2'
+}
+
+console.log(user1.getName( 'Khan'));
+
+const user2Func = user1.getName.bind(user2, 'Khan')
+user2Func();
+
+console.log(user1.getName.call(user2, 'Khan'))
+console.log(user1.getName.apply(user2, ['Khan']))
